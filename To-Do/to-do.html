@@ -1,0 +1,149 @@
+<html>
+	<head>
+		<title>TO-DO</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</head>
+	<body onload="setup()">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col">	
+					<header>
+						<p class="text-center">What are you accomplishing today?<span class="badge badge-light" id="notification"></span></p>
+					</header>
+				</div>
+			</div> 
+			
+			<div class="row" id="input">
+				<div class="col-6">
+					<div class="input-group mb-3">
+  						<div class="input-group-prepend">
+    						<span class="input-group-text" id="basic-addon1">-></span>
+  						</div>
+  						<input type="text" class="form-control" placeholder="Task" id="taskin">
+  						<button type="button" class="btn btn-primary" id="taskbutt" OnClick="main()">Enter</button>
+  						<button type="button" class="btn btn-success" id="savebutt" OnClick="savemethod()">Save</button>
+  						<button type="button" class="btn btn-danger" id="clearbutt" OnClick="nodedeath()">Clear</button>
+  					</div>
+
+  				</div>
+			</div>
+
+
+			<div class="row" id="bigcontainer">
+				<div class="listItems col">
+					<ul class="col" id="listcontainer">
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		function setup() {
+			//message of the day bullcrap
+			document.getElementById("notification").innerHTML = "yeer";
+		}
+
+		let	inputcall = document.getElementById("taskin");
+		inputcall.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				main();
+			}
+		});
+
+		function main() {
+			const userin = document.getElementById("taskin").value;
+			let lengthtest = userin.length;
+
+			if (lengthtest > 0) {
+				let text = document.createTextNode(userin); 				
+				let node = document.createElement("LI")						
+				node.appendChild(text);										
+				document.getElementById("listcontainer").appendChild(node);
+				reset();
+			}
+		}
+
+		function reset() {
+			let userin = document.getElementById("taskin").value='';
+		}
+
+		function nodedeath() {
+			let childsize = document.getElementById("listcontainer").childNodes.length;
+			while (i=0, childsize > i) {
+				document.getElementById("listcontainer").removeChild(listcontainer.childNodes[i]);
+				i++;
+			}
+		}	
+		
+
+
+		//add function that stores that persons to do list in base64 as a cookie so it can remember
+		function savemethod() {
+			let childcall = document.getElementById("listcontainer").childNodes;
+			let childsize = document.getElementById("listcontainer").childNodes.length;
+			let child = document.getElementById("listcontainer").childNodes.text;
+			
+			console.log(childcall.tostring());
+			let test = "";
+			console.log(childcall[1].value);
+		}
+
+
+	</script>
+
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			padding-top: 5%;
+			padding-left: 5%;
+			padding-right: 5%;
+		}
+
+		#input {
+			display: flex;
+			justify-content: center;
+		}
+
+		#bigcontainer {
+			background-color: grey;
+			border-radius:2em;
+			height: 100%;
+			padding: 5%;
+		}
+
+		#savebutt {
+			margin-left: 1em;
+		}
+
+		#clearbutt {
+			margin-left: 1em;
+
+		}
+
+		ul {
+			list-style: none;
+			
+
+		}
+
+		li {
+			font-size: 3em;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+			text-align: center;
+		}
+
+		li:hover {
+			color: red;
+
+		}
+		
+
+	</style>
+</html>
